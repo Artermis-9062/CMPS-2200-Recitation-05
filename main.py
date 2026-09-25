@@ -1,5 +1,9 @@
-from collections import defaultdict
+'''
+Name: Chuong Hoang Pham
+'''
 
+
+from collections import defaultdict
 def supersort(a, k):
     """
     The main sorting algorithm. You'll complete the
@@ -12,9 +16,9 @@ def supersort(a, k):
     Returns:
       sorted version a
     """
-    counts = count_values(a, k)
-    positions = get_positions(counts)
-    return construct_output(a, positions)
+    counts = count_values(a, k) # Work: O(n)
+    positions = get_positions(counts) # Work: O(k), Span: O(log k)
+    return construct_output(a, positions) 
 
 def count_values(a, k):
     """
@@ -30,8 +34,11 @@ def count_values(a, k):
     [2, 3, 2, 1]
     """
     ###TODO
-    pass
-    
+    number_freq = [0 for _ in range(k + 1)]
+    for num in a:
+      number_freq[num] += 1
+    return number_freq
+
 def get_positions(counts):
     """
     Params:
@@ -44,7 +51,7 @@ def get_positions(counts):
     [0, 2, 5, 7]    
     """
     ###TODO
-    pass
+    return [0] + scan(plus, 0, counts)[0][:-1]
     
 def construct_output(a, positions):
     """
@@ -61,7 +68,23 @@ def construct_output(a, positions):
     [0,0,1,1,1,2,2,3]    
     """
     ###TODO
-    pass
+    res = [None] * len(a)
+
+    # fill_out_v = 0
+    # for i in positions:
+    #   res[i] =  fill_out_v
+    #   fill_out_v += 1
+
+    # for i in range(len(res)):
+    #   if res[i] == None:
+    #     res[i] = res[i-1]
+
+    for num in a:
+      ind = positions[num]
+      res[ind] = num
+      positions[num] += 1
+
+    return res
 
 def count_values_mr(a, k):
     """
@@ -69,18 +92,20 @@ def count_values_mr(a, k):
     This is done; you'll have to complete count_map and count_reduce.
     """
     # done.
+    print(run_map_reduce(count_map, count_reduce, a))
     int2count = dict(run_map_reduce(count_map, count_reduce, a))
+
     return [int2count.get(i,0) for i in range(k+1)]
 
 def count_map(value):
     # hint: this function should return a list, even if that list
     # contains a single tuple
     ###TODO
-    pass
+    return [(value, 1)]
 
 def count_reduce(group):
     ###TODO
-    pass
+    return [group[0], reduce(plus, 0, group[1])]
 
 
 # the below functions are provided for use above.
