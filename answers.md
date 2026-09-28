@@ -13,9 +13,9 @@ Place all written answers from `recitation-05.md` here for easier grading.
 
     Since `scan` has the work $O(n)$ and span $O(\log n)$ for n is the length of the sequence, in this problem, the length is $k$ which is the max number in the list. Therefore,
 
-    - Work: $O(k)$
+    - Work: $O(n)$
 
-    - Span: $O(\log k)$
+    - Span: $O(\log n)$
 
 - **5) (2 pts)** What is the work and span of `construct_output`?
 
